@@ -1,0 +1,51 @@
+\documentclass[fleqn]{article}
+\usepackage{amsmath,amsfonts}
+\usepackage{algorithm,algpseudocode}
+\usepackage[margin=0.24in]{geometry}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{datetime}
+\setdescription{leftmargin=\parindent,labelindent=\parindent}
+\title{Homework 1 - Problem 5B}
+\author{Mark Labrador}
+\date{\today}
+
+\begin{document}
+\maketitle
+\paragraph{Problem Statement:} ~\\
+Consider the following sequence of numbers: $s_{n} = 1 + \prod\limits_{i=0}^{n-1} s_{i}$ , where $s_{0} = 2$. Prove that any two numbers in this sequence are relatively prime.
+
+\paragraph{Proof by Induction:} ~\\
+
+\paragraph{Basis:} ~\\
+\begin{align*}
+	s_{0} &= 2 \\
+	s_{1} &= 1 + \prod\limits_{i=0}^{0} s_{i} = 1 + s_{0} = 1 + 2 = 3
+\end{align*}
+
+\paragraph{Induction Hypothesis: } ~\\
+Suppose for all $n \ge 0$, $s_{n}$ are pairwise relatively prime.  In other words, $(\forall\, n \ge 1)\ \gcd\left(s_{n-1}, s_{n}\right)=1$.  Show that $\gcd\left(s_{n}, s_{n+1}\right)=1$.\\
+
+\noindent
+We know that the following property holds for gcd's, 
+
+\begin{equation}\label{eq:trans_gcd}
+\text{For some sequence of integers } a_{i}\text{, if } gcd(a_{i}, a_{i+1})=d \text{ and } gcd(a_{i+1}, a_{i+2})=d\text{, then } gcd(a_{i}, a_{i+2})=d.
+\end{equation}
+
+\noindent
+For the sequence of numbers $s_{i}$, if we can show that $\gcd\left(s_{n}, s_{n+1}\right)=1$, then we'd have shown that all numbers in the sequence are relatively prime.
+
+\begin{align*}
+	s_{n+1} &= 1 + s_{n}\prod\limits_{i=0}^{n-1} s_{i} \\
+	&= 1 + s_{n}\left(s_{n}-1\right) &\text{, because } s_{n}-1 = \prod\limits_{i=0}^{n-1} s_{i} \text{ from } s_{n} = 1 + \prod\limits_{i=0}^{n-1} s_{i} \text{, by definition.} \\
+	1 &= s_{n+1} - \left(s_{n}-1\right)s_{n} \\
+	&= as_{n+1} - bs_{n} &\text{, where $a=1$ and $b=s_{n} - 1$.}
+\end{align*}
+
+\noindent
+So we have shown that $1$ is a linear combination of $s_n$ and $s_{n+1}$, and there is no other positive integer smaller than $1$ so we can conclude that $\gcd\left(s_n, s_{n+1}\right)=1$.  By the induction hypothesis and property \ref{eq:trans_gcd}, all numbers in the sequence $s_{i}$ for $i=0 \dots n$ are pairwise relatively prime.
+
+\paragraph{QED}
+
+\end{document}
